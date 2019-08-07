@@ -126,11 +126,10 @@ class Train(object):
 
             running_avg_loss = calc_running_avg_loss(loss, running_avg_loss, self.summary_writer, iter)
 
-            print("iter: {} of {}, train_loss: {}".format(iter, n_iters, running_avg_loss))
-
             iter += 1
 
             if iter % 100 == 0:
+                print("iter: {} of {}, train_loss: {}".format(iter, n_iters, running_avg_loss))
                 self.summary_writer.flush()
             print_interval = 1000
             if iter % print_interval == 0:
