@@ -1,6 +1,10 @@
 import os
 
-root_dir = os.path.join(os.path.expanduser("~"), "Projects/NLP/Text_Summarization/data")
+# Handle file paths in other machines (ie colab)
+if "PGN_DATA_DIR" in os.environ:
+    root_dir = os.environ["PGN_DATA_DIR"]
+else:
+    root_dir = os.path.join(os.path.expanduser("~"), "Projects/NLP/Text_Summarization/data")
 
 #train_data_path = os.path.join(root_dir, "ptr_nw/cnn-dailymail-master/finished_files/train.bin")
 train_data_path = os.path.join(root_dir, "ptr_nw/cnn-dailymail-master/finished_files/chunked/train_*")
