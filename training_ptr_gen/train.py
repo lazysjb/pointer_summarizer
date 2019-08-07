@@ -6,7 +6,7 @@ import argparse
 
 import tensorflow as tf
 import torch
-from model import Model
+from training_ptr_gen.model import Model
 from torch.nn.utils import clip_grad_norm_
 
 from torch.optim import Adagrad
@@ -15,7 +15,7 @@ from data_util import config
 from data_util.batcher import Batcher
 from data_util.data import Vocab
 from data_util.utils import calc_running_avg_loss
-from train_util import get_input_from_batch, get_output_from_batch
+from training_ptr_gen.train_util import get_input_from_batch, get_output_from_batch
 
 use_cuda = config.use_gpu and torch.cuda.is_available()
 
@@ -125,6 +125,9 @@ class Train(object):
             loss = self.train_one_batch(batch)
 
             running_avg_loss = calc_running_avg_loss(loss, running_avg_loss, self.summary_writer, iter)
+
+            print("iter: {} of {}, train_loss: {}".format(iter, n_iters, running_avg_loss))
+
             iter += 1
 
             if iter % 100 == 0:
